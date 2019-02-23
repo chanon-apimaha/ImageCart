@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  ImageCart
 //
-//  Created by Developer Pantip on 22/2/2562 BE.
+//  Created by Banchai Nangpang on 22/2/2562 BE.
 //  Copyright © 2562 Developer BN. All rights reserved.
 //
 

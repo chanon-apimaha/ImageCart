@@ -9,22 +9,28 @@
 /* Begin PBXBuildFile section */
 		293698576A51848D5F29CEBA /* Pods_ImageCart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F801F908BF172F099C34F562 /* Pods_ImageCart.framework */; };
 		8B13BC0F221FA552009F97E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13BC0E221FA552009F97E0 /* AppDelegate.swift */; };
-		8B13BC11221FA552009F97E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13BC10221FA552009F97E0 /* ViewController.swift */; };
+		8B13BC11221FA552009F97E0 /* TableImageCartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13BC10221FA552009F97E0 /* TableImageCartController.swift */; };
 		8B13BC14221FA552009F97E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B13BC12221FA552009F97E0 /* Main.storyboard */; };
 		8B13BC16221FA553009F97E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B13BC15221FA553009F97E0 /* Assets.xcassets */; };
 		8B13BC19221FA553009F97E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B13BC17221FA553009F97E0 /* LaunchScreen.storyboard */; };
 		8B13BC21221FB7D9009F97E0 /* UIcolorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13BC20221FB7D9009F97E0 /* UIcolorExtension.swift */; };
+		8B343F452221AE1000ECED32 /* TableCellImageCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B343F442221AE1000ECED32 /* TableCellImageCart.swift */; };
+		8B343F472221C0AA00ECED32 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B343F462221C0AA00ECED32 /* UITableViewExtension.swift */; };
+		8B343F492221D5AC00ECED32 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B343F482221D5AC00ECED32 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8B13BC0B221FA552009F97E0 /* ImageCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B13BC0E221FA552009F97E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B13BC10221FA552009F97E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8B13BC10221FA552009F97E0 /* TableImageCartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImageCartController.swift; sourceTree = "<group>"; };
 		8B13BC13221FA552009F97E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B13BC15221FA553009F97E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B13BC18221FA553009F97E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B13BC1A221FA553009F97E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B13BC20221FB7D9009F97E0 /* UIcolorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIcolorExtension.swift; sourceTree = "<group>"; };
+		8B343F442221AE1000ECED32 /* TableCellImageCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellImageCart.swift; sourceTree = "<group>"; };
+		8B343F462221C0AA00ECED32 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		8B343F482221D5AC00ECED32 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		A83A62C91822CA8D3B204660 /* Pods-ImageCart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageCart.debug.xcconfig"; path = "Target Support Files/Pods-ImageCart/Pods-ImageCart.debug.xcconfig"; sourceTree = "<group>"; };
 		BEFB06CC036E5C733E0C49D2 /* Pods-ImageCart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageCart.release.xcconfig"; path = "Target Support Files/Pods-ImageCart/Pods-ImageCart.release.xcconfig"; sourceTree = "<group>"; };
 		F801F908BF172F099C34F562 /* Pods_ImageCart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImageCart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +54,6 @@
 				A83A62C91822CA8D3B204660 /* Pods-ImageCart.debug.xcconfig */,
 				BEFB06CC036E5C733E0C49D2 /* Pods-ImageCart.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -73,13 +78,16 @@
 		8B13BC0D221FA552009F97E0 /* ImageCart */ = {
 			isa = PBXGroup;
 			children = (
+				8B13BC1A221FA553009F97E0 /* Info.plist */,
 				8B13BC0E221FA552009F97E0 /* AppDelegate.swift */,
-				8B13BC10221FA552009F97E0 /* ViewController.swift */,
+				8B343F442221AE1000ECED32 /* TableCellImageCart.swift */,
+				8B13BC10221FA552009F97E0 /* TableImageCartController.swift */,
 				8B13BC20221FB7D9009F97E0 /* UIcolorExtension.swift */,
-				8B13BC12221FA552009F97E0 /* Main.storyboard */,
+				8B343F462221C0AA00ECED32 /* UITableViewExtension.swift */,
 				8B13BC15221FA553009F97E0 /* Assets.xcassets */,
 				8B13BC17221FA553009F97E0 /* LaunchScreen.storyboard */,
-				8B13BC1A221FA553009F97E0 /* Info.plist */,
+				8B13BC12221FA552009F97E0 /* Main.storyboard */,
+				8B343F482221D5AC00ECED32 /* UIViewExtension.swift */,
 			);
 			path = ImageCart;
 			sourceTree = "<group>";
@@ -214,7 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B13BC11221FA552009F97E0 /* ViewController.swift in Sources */,
+				8B343F492221D5AC00ECED32 /* UIViewExtension.swift in Sources */,
+				8B343F452221AE1000ECED32 /* TableCellImageCart.swift in Sources */,
+				8B13BC11221FA552009F97E0 /* TableImageCartController.swift in Sources */,
+				8B343F472221C0AA00ECED32 /* UITableViewExtension.swift in Sources */,
 				8B13BC21221FB7D9009F97E0 /* UIcolorExtension.swift in Sources */,
 				8B13BC0F221FA552009F97E0 /* AppDelegate.swift in Sources */,
 			);
