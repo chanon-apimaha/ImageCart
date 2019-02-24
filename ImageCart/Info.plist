@@ -24,6 +24,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>แอปพลิเคชัน ImageCart ขออนุญาติเข้าถึงคลังรูปภาพ เพื่อการตั้งกระทู้ บันทึกรูปภาพ และเปลี่ยนรูปโปรไฟล์</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -17,10 +17,10 @@ public extension UITableView {
     }
     
     public struct background {
-        public static var color = UIColor(hex: "#3C3963")
+        public static var color = UIColor(hex: "#f7d176")
     }
     
-    public func setDefaultPantip(sSeparatorStyle: UITableViewCell.SeparatorStyle = .singleLine, bHaveFooter: Bool = false, separatorInset: UIEdgeInsets = UIEdgeInsets.init(top: UITableView.insets.top, left: UITableView.insets.left, bottom: UITableView.insets.bottom, right: UITableView.insets.right)) {
+    public func setDefault(sSeparatorStyle: UITableViewCell.SeparatorStyle = .singleLine, bHaveFooter: Bool = false, separatorInset: UIEdgeInsets = UIEdgeInsets.init(top: UITableView.insets.top, left: UITableView.insets.left, bottom: UITableView.insets.bottom, right: UITableView.insets.right)) {
         self.allowsSelection = true
         self.preservesSuperviewLayoutMargins = false
         self.cellLayoutMarginsFollowReadableWidth = false
@@ -33,7 +33,7 @@ public extension UITableView {
             self.tableFooterView = view //ตัดเส้นคั่นที่เป็น default footer ออก
         }
         self.backgroundColor = UITableView.background.color
-        self.separatorColor = UIColor.white.withAlphaComponent(0.12)//UIColor._separatorColor
+        self.separatorColor = UIColor(hex: "#f99325").withAlphaComponent(0.54)
     }
     
     public func performUpdate(_ update: ()->Void, completion: (()->Void)?) {
@@ -50,5 +50,24 @@ public extension UITableView {
         let row = max(numberOfRows(inSection: section) - 1, 0)
         
         return IndexPath(row: row, section: section)
+    }
+    
+}
+
+extension UITableViewCell {
+    
+    var tableView: UITableView? {
+        return next(UITableView.self)
+    }
+    
+    var indexPath: IndexPath? {
+        return tableView?.indexPath(for: self)
+    }
+}
+
+extension UIResponder {
+    
+    func next<T: UIResponder>(_ type: T.Type) -> T? {
+        return next as? T ?? next?.next(type)
     }
 }

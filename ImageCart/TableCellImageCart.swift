@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import BNImagePageView
 
 class TableCellImageCart: UITableViewCell {
     static let ReuseIdentifier = "TableCellImageCart"
-   private var fConWidthImageView: NSLayoutConstraint!
+    private var fConWidthImageView: NSLayoutConstraint!
     
-    private var mImageView: UIImageView = {
+    lazy var mImageView: UIImageView = {
         let mImageView: UIImageView = UIImageView()
+        mImageView.addTargetClosure(closure: { (mView) in
+            if let mImageView = mView as? UIImageView {
+            self.ViewImage(imageView: mImageView)
+            }
+        })
         return mImageView
     }()
     
     lazy var mMainView: UIView = {
         let mMainView: UIView = UIView()
         mMainView.backgroundColor = .clear
+        
         let mMainImageView: UIView = {
             let mMainImageView: UIView = UIView()
             self.mImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +39,7 @@ class TableCellImageCart: UITableViewCell {
             self.fConWidthImageView.isActive = true
             return mMainImageView
         }()
+        
         let mRemoveButton: UIButton = UIButton()
         mRemoveButton.addTarget(self, action: #selector(self.removeImage), for: .touchUpInside)
         mRemoveButton.setImage(UIImage(named: "remove"), for: .normal)
@@ -72,9 +80,27 @@ class TableCellImageCart: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configre(mImage: UIImage?, background: UIColor) {
+    func configre(ImageData: ImageData?) {
+        self.mImageView.backgroundColor = ImageData?.backgroundColor
+        self.mImageView.image = ImageData?.image
+        var fWidth: CGFloat = ImageData?.image?.size.width ?? 50
+        var fHeight: CGFloat = ImageData?.image?.size.height ?? 50
+        var fNewWidth: CGFloat = 0.0
         
-        mImageView.backgroundColor = background
+        let ratio = fWidth / fHeight
+        if fWidth < fHeight {
+            if fHeight > 300.0 {
+                fHeight = 300.0
+            }
+            fNewWidth = fHeight * ratio
+        } else {
+            if fWidth > 300.0 {
+                fWidth = 300.0
+            }
+            fNewWidth = fWidth
+        }
+        
+        self.fConWidthImageView.constant = fNewWidth
     }
     
     @objc func removeImage() {
@@ -85,13 +111,23 @@ class TableCellImageCart: UITableViewCell {
             self.confirmRemove()
         }))
         
-       DispatchQueue.main.async {
-        self.contentView.superview?.viewController?.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.contentView.superview?.viewController?.present(alertController, animated: true, completion: nil)
         }
     }
     
-    func confirmRemove()
-    {
-        print("you pressed")
+    func confirmRemove() {
+        if let oTableImageCartController = self.contentView.superview?.viewController as? TableImageCartController {
+            oTableImageCartController.axImageData.remove(at: (self.indexPath?.row)!)
+            oTableImageCartController.mTableView.beginUpdates()
+            oTableImageCartController.mTableView.deleteRows(at: [self.indexPath!], with: .fade)
+            oTableImageCartController.mTableView.endUpdates()
+        }
+    }
+    
+    func ViewImage(imageView: UIImageView)  {
+        if let oTableImageCartController = self.contentView.superview?.viewController as? TableImageCartController {
+            oTableImageCartController.navigationController?.BNImagePage(mImageViewShowFirst: imageView, sImageUrl: "")
+        }
     }
 }

@@ -10,28 +10,47 @@ import UIKit
 
 class TableImageCartController: UIViewController {
     
-    var axImageData: [UIColor] = [.green, .yellow, .red]
+    var axImageData: [ImageData] = [
+        ImageData(image: UIImage(named: "work"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "think"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "slow"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "sad"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "happy"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "diamond"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "passion"), backgroundColor: .blue),
+        ImageData(image: UIImage(named: "moterBike"), backgroundColor: .red),
+        ImageData(image: UIImage(named: "yogurt"), backgroundColor: .green),
+        ImageData(image: UIImage(named: "food"), backgroundColor: .yellow),
+    ]
     
     fileprivate var mHeaderView: UIView = {
         let mMainView: UIView = UIView()
-        mMainView.backgroundColor = UIColor(hex: "#505968")
+        mMainView.backgroundColor = UIColor(hex: "#f99325")
         
+        let mHoldButton: UIButton = UIButton()
         let mHeaderLabel: UILabel = UILabel()
-        mHeaderLabel.textColor = .red
-        mHeaderLabel.text = "รายการ"
-        mHeaderLabel.textAlignment = .left
+        mHeaderLabel.textColor = UIColor(hex: "#f4dfc8")
+        mHeaderLabel.text = "คลังรูปภาพของฉัน"
+        mHeaderLabel.textAlignment = .center
         
         let mAddImageButton: UIButton = UIButton()
-        //        mAddImageButton.backgroundColor = .green
         mAddImageButton.setImage(UIImage(named: "add-image-2"), for: .normal)
         
+        mHoldButton.translatesAutoresizingMaskIntoConstraints = false
         mHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         mAddImageButton.translatesAutoresizingMaskIntoConstraints = false
         
+        mMainView.addSubview(mHoldButton)
         mMainView.addSubview(mHeaderLabel)
         mMainView.addSubview(mAddImageButton)
         
-        mHeaderLabel.leftAnchor.constraint(equalTo: mMainView.leftAnchor, constant: 16.0).isActive = true
+        mHoldButton.leftAnchor.constraint(equalTo: mMainView.leftAnchor, constant: 16.0).isActive = true
+        mHoldButton.topAnchor.constraint(equalTo: mMainView.topAnchor, constant: 8.0).isActive = true
+        mHoldButton.bottomAnchor.constraint(equalTo: mMainView.bottomAnchor).isActive = true
+        mHoldButton.rightAnchor.constraint(equalTo: mHeaderLabel.leftAnchor, constant: -8.0).isActive = true
+        mHoldButton.widthAnchor.constraint(equalToConstant: 40.0).isActive = true
+        mHoldButton.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+
         mHeaderLabel.topAnchor.constraint(equalTo: mMainView.topAnchor, constant: 8.0).isActive = true
         mHeaderLabel.bottomAnchor.constraint(equalTo: mMainView.bottomAnchor).isActive = true
         mHeaderLabel.rightAnchor.constraint(equalTo: mAddImageButton.leftAnchor, constant: -8.0).isActive = true
@@ -44,13 +63,14 @@ class TableImageCartController: UIViewController {
         return mMainView
     }()
     
-    fileprivate  var mTableView: UITableView = UITableView()
+    internal var mTableView: UITableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "คลังภาพ"
+    
         self.edgesForExtendedLayout = []
-        self.mTableView.setDefaultPantip()
+        self.mTableView.setDefault()
         
         self.mTableView.delegate = self
         self.mTableView.dataSource = self
@@ -85,8 +105,27 @@ class TableImageCartController: UIViewController {
             self.mTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
     }
-}
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 
+}
 
 extension  TableImageCartController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,16 +134,27 @@ extension  TableImageCartController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.mTableView.dequeueReusableCell(withIdentifier: TableCellImageCart.ReuseIdentifier, for: indexPath) as! TableCellImageCart
-        cell.configre(mImage: nil, background: axImageData[indexPath.row])
+        cell.configre(ImageData: axImageData[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 100.0 //Choose your custom row height
+        var fWidth: CGFloat = self.axImageData[indexPath.row].image?.size.width ?? 50
+        var fHeight: CGFloat = self.axImageData[indexPath.row].image?.size.height ?? 50
+        var fNewHeight: CGFloat = 0.0
+        
+        let ratio = fWidth / fHeight
+        if fWidth > fHeight {
+            if fWidth > 300.0 {
+                fWidth = 300.0
+            }
+            fNewHeight = fWidth / ratio
         } else {
-            return 50
+            if fHeight > 300.0 {
+                fHeight = 300.0
+            }
+            fNewHeight = fHeight
         }
+        return fNewHeight
     }
-    
-    
 }
