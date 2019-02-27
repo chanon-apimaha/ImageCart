@@ -118,6 +118,7 @@ class TableCellImageCart: UITableViewCell {
     
     func confirmRemove() {
         if let oTableImageCartController = self.contentView.superview?.viewController as? TableImageCartController {
+            oTableImageCartController.removeItemImageFromDocument(imageNameExtfile: oTableImageCartController.axImageData[(self.indexPath?.row)!].name!)
             oTableImageCartController.axImageData.remove(at: (self.indexPath?.row)!)
             oTableImageCartController.mTableView.beginUpdates()
             oTableImageCartController.mTableView.deleteRows(at: [self.indexPath!], with: .fade)

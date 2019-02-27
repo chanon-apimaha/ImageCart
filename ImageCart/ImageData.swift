@@ -10,10 +10,12 @@ import UIKit
 
 public class ImageData {
     let image: UIImage?
+    let name: String?
     let backgroundColor: UIColor?
 
-    public init(image: UIImage?, backgroundColor: UIColor?) {
+    public init(image: UIImage?, name: String, backgroundColor: UIColor?) {
         self.image = image
+        self.name = name
         self.backgroundColor = backgroundColor
     }
 }
